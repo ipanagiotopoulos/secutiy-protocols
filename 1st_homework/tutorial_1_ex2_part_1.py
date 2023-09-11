@@ -1,4 +1,6 @@
-import re
+#Author Panagiotopoulos Ioannis
+#Course Security Protocols - Tampere University
+#Week 36 - Double Caesar's cipher exercise, task 2
 import datetime
 
 def enc(plaintext, key):  # key = shift number K
@@ -62,18 +64,13 @@ def main():
         exit()
     elif prog_option == "enc":
      start = datetime.datetime.now()
-     print(enc(enc(text, shift_number_k),sec_shift_number_k))
+     print(enc(enc(text, shift_number_k),sec_shift_number_k)) #double encryption
      end = datetime.datetime.now()
      sol_time = (end - start) #milliseconds
      print("Solution time", sol_time.total_seconds()*1000, "milliseconds")
     else:
       start = datetime.datetime.now()
-      for step in range(0,26,1):
-              print(step, " : ", dec(text, step),"  |  Time elapsed", (datetime.datetime.now() - start).total_seconds()*1000, "milliseconds")
-
-      end = datetime.datetime.now()
-      sol_time = (end - start) #milliseconds
-      print("Solution time", sol_time.total_seconds()*1000, " milliseconds")
+      print(step, " : ", dec(dec(text, shift_number_k), sec_shift_number_k),"  |  Time elapsed", (datetime.datetime.now() - start).total_seconds()*1000, "milliseconds")
 
 if __name__ == "__main__":
     main()

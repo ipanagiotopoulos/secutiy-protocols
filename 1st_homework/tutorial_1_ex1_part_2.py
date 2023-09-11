@@ -1,5 +1,9 @@
-import re
+#Author Panagiotopoulos Ioannis
+#Course Security Protocols - Tampere University
+#Week 36 -  Caesar's cipher exercise, task 1, subtask 2
+
 import datetime
+
 
 def dec(ciphertext, key):  # key = shift number K
     text_to_convert = [char for char in ciphertext]
@@ -20,7 +24,7 @@ def stringify(char_array):
      return str
 
 def main():
-    text = " RKFO NYXO GOVV DY VOKBX DRSC DOMRXSAEO. LED DRSXQ GSVV QOD WYBO NSPPSMEVD - KNWSX"
+    text = "IYE RKFO NYXO GOVV DY VOKBX DRSC DOMRXSAEO. LED DRSXQ GSVV QOD WYBO NSPPSMEVD - KNWSX" #harcoded ciphertext string
     start = datetime.datetime.now()
     for step in range(0, 26, 1 ):
        print(step, " : ", dec(text, step),"  |  Time elapsed", (datetime.datetime.now() - start).total_seconds()*1000, "milliseconds")

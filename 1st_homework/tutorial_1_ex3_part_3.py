@@ -1,16 +1,22 @@
+#Author Panagiotopoulos Ioannis
+#Course Security Protocols - Tampere University
+#Week 36 - Affine cipher exercise, task3, tutorial 1
+
 import string
 
+# Calculating the Greatest common factor
 def gcd(a, b):
     while b:
         a, b = b, a % b
     return a
-
+# Modular inverse
 def mod_inverse(a, m):
     for x in range(1, m):
         if (a * x) % m == 1:
             return x
     return None
 
+#affine encryption
 def affine_encrypt(plaintext, a, b):
     m = len(string.ascii_lowercase)
     ciphertext = ""
@@ -45,19 +51,21 @@ def affine_decrypt(ciphertext, a, b):
 
     return plaintext
 
-# Task 1: Encrypt the plaintext "aliceandbob" with keys a = 7 and b = 5
-plaintext1 = "aliceandbob"
-a1 = 7
-b1 = 5
-encrypted_text1 = affine_encrypt(plaintext1, a1, b1)
-print("Encrypted Text (a=7, b=5):", encrypted_text1)
+# Encrypting the plaintext "aliceandbob" with keys a = 7 and b = 5
+def main():
+    plaintext1 = "aliceandbob"
+    a1 = 7
+    b1 = 5
+    encrypted_text1 = affine_encrypt(plaintext1, a1, b1)
+    print("Encrypted Text (a=7, b=5):", encrypted_text1)
 
-# Task 2: Affine vs Caesar cipher security
-# Affine cipher is more secure than Caesar cipher since it uses a more complex transformation, making it harder to crack.
+    # Decrypt the ciphertext "MDS CTMZU MDS CTMZU" with keys a = 11 and b = 2
+    ciphertext2 = "MDS CTMZU MDS CTMZU"
+    a2 = 11
+    b2 = 2
+    decrypted_text2 = affine_decrypt(ciphertext2, a2, b2)
+    print("Decrypted Text (a=11, b=2):", decrypted_text2)
 
-# Task 3: Decrypt the ciphertext "MDS CTMZU MDS CTMZU" with keys a = 11 and b = 2
-ciphertext2 = "MDS CTMZU MDS CTMZU"
-a2 = 11
-b2 = 2
-decrypted_text2 = affine_decrypt(ciphertext2, a2, b2)
-print("Decrypted Text (a=11, b=2):", decrypted_text2)
+
+if __name__ == "__main__":
+    main()

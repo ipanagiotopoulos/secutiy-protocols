@@ -1,6 +1,12 @@
+#Author Panagiotopoulos Ioannis
+#Course Security Protocols - Tampere University
+#Week 36 - Affine Caesar's cipher exercise, task 1, subtask1
+
 import re
 import datetime
 
+
+#you can encode with any integer number as a key, since module operator has been taken into account when the shift cipher is calculated
 def enc(plaintext, key):  # key = shift number K
     text_to_convert = [char for char in plaintext]
     result = []
@@ -13,24 +19,29 @@ def enc(plaintext, key):  # key = shift number K
             result.append(text_to_convert[ch])
     return stringify(result)
 
+
+#you can decode with any integer number a a key, since module operator has been taken into account when the shift cipher is calculated
 def dec(ciphertext, key):  # key = shift number K
     text_to_convert = [char for char in ciphertext]
     result = []
     for ch in range(0, len(text_to_convert), 1):
-        if text_to_convert[ch].isupper():
+        if text_to_convert[ch].isupper():   #ASCII code 65 is the beginning for upper case alphabetical characters extending up to 91
             result.append(chr((ord(text_to_convert[ch]) - key - 65) % 26 + 65))
-        elif text_to_convert[ch].islower():
+        elif text_to_convert[ch].islower(): #ASCII code 97 is the beginning for lower case alphabetical characters extending up to 97
             result.append(chr((ord(text_to_convert[ch]) - key - 97) % 26 + 97))
         else:
             result.append(text_to_convert[ch])
     return stringify(result)
 
+#method for converting an array of chars to string
 def stringify(char_array):
      str = ""
      for str_ch in range(0, len(char_array), 1):
         str += char_array[str_ch]
      return str
 
+#scanner method for shift number K, A.K.A Key
+#In this method we exlude invalid values for shift number K such as decimals, chars and etc
 def get_number_K():
     try:
      print("Type the number of the shift number K \nIntegers are only allowed!\nNumber:")
@@ -45,7 +56,7 @@ def main():
     shift_number_k = get_number_K()
     # Ciphertext/Plaintext input from the user
     text = ""
-    while text == "" or not re.match(r'^[a-zA-Z -]*$', text):
+    while text == "":
         print("Enter the text! \nOnly characters from a-z and A-Z are allowed\nText:")
         text = input()
     # Option enc/dec input
