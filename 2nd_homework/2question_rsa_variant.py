@@ -4,8 +4,7 @@
 #Second Tutorial, Second Exercise, RSA Variant
 
 
-#I am facing some difficulties with the cryptodome library, but ECC is reportedly 50-100 times faster than RSA
-# for the 128 and 256 bits public key
+
 
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP

@@ -21,6 +21,8 @@ class Encryptor:
     def pad(self, s):
         return s + b"\0" * (AES.block_size - len(s) % AES.block_size) #
 
+
+    #Question 4: encryption is about 50 times faster than decryption
     def encrypt(self, plaintext):
         start = datetime.datetime.now()
         plain_text_to_bytes = str.encode(plaintext)
