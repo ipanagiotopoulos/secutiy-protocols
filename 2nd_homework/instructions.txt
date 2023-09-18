@@ -1,0 +1,14 @@
+It is adivsaple to use a python environment.
+
+Tutorial on that is below:
+
+https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/
+
+
+
+Instructions:
+
+pip install -r reaquirements.text
+
+python3 programme.py
+

@@ -1,6 +1,7 @@
 #Author Panagiotopoulos Ioannis
 #Course Security Protocols - Tampere University
 #Week 36 - Double Caesar's cipher exercise, task 2
+
 import datetime
 
 def enc(plaintext, key):  # key = shift number K
