@@ -1,0 +1,77 @@
+# Author Panagiotopoulos Ioannis
+# Tampere University | Security Protocols Fall 23'
+# Exercise 2, Tutorial 3
+# ---------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
+#Question
+# In this exercise, you will explore how websites are typically secured using public-key certificates.
+# You are required to launch a simple web server and secure it with your generated certificated
+# (generate a certificate with a sim- ple domain name in the previous exercise).
+# Then you are required to use a packet analyzer tool (for example Wireshark) to capture the traffic
+# between the web server and your browser, and observe the encrypted traffic.
+# ---------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------
+# To complete this exercise:
+#• Configure your computer to recognize the self-created domain name;
+#• Launch the web server with the generated certificate;
+#• Import the self-signed certificate into the browser of your choice(any observations?);
+#• Take a screenshot of web server page with information on the certificate displayed.
+#• Write a short report on your observations with the packet analyzer tool.
+
+
+# 1st step
+# I modified the /etc/hosts file, through the nano /etc/hosts and I added the entry "127.0.0.1 ioannispanagiotopoulos.com" at the very end of the file
+
+# Nginx version 1.25.2 has been used for the purposes of completing this exercise.
+# Host OS MacOS 11 +, and the installation of nginx has been made with the help of homebrew package manager.
+# A Comprehensive nginx configuration tutrorial for MacOS host machines can be found here: https://www.javatpoint.com/installing-nginx-on-mac
+
+
+# The nginx.conf file is shown below
+
+
+        worker_processes  5;  ## Default: 1
+        error_log  logs/error.log;
+        pid        logs/nginx.pid;
+        worker_rlimit_nofile 8192;
+
+
+        events {
+        worker_connections  4096;  ## Default: 1024
+        }
+
+        http {
+
+        server {
+            listen 80 default_server;
+            listen [::]:80 default_server;
+            listen 443 ssl http2  default_server;
+            listen [::]:443 ssl http2  default_server;
+            server_name 127.0.0.1;
+
+            ssl_certificate /opt/homebrew/etc/ssl/ioannispanagiotopoulos.com.crt;
+            ssl_certificate_key /opt/homebrew/etc/ssl/ioannispanagiotopoulos.com.key;
+            ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+            root /opt/homebrew/var/www;
+            server_name ioannispanagiotopoulos.com www.ioannispanagiotopoulos.com;
+            access_log  /opt/homebrew/etc/nginx/logs/ioannispanagiotopoulos.com.access.log;
+            error_log   /opt/homebrew/etc/nginx/logs/ioannispanagiopoulos.com.error.log;
+            location / {
+                index  index.html;
+            }
+        }
+
+        }
+
+# Question 3
+# After deploying the nginx server and our service is live and running in both ports 80 and 443 and we have assured that there are no errors with its configuration
+# after running the command "nginx -t" which should output the message "nginx: configuration file /your/path/to/nginx.conf test is successful", then we need to import
+# CA root certificate(public key) or ex2CA.crt in our case to the browser and allow an excpetion for the accessing this website after clicking "Accept the Risk and Continue"
+# under the advanced options in the warning which is given by the browser about the SSL_ERROR_BAD_CERT_DOMAIN error.
+
+
+# Obviously self-signed certificates are not regarded as secure by modern web browsers, since there is no credible TTP(Trusted Third Party) to certify the Subject.
+
+#Q4: Screenshot of the ssl certificate is located in this project folder under the name: screenshot.png
+
+#Q5: wireshark.png image has been attached from a direct https call of the ioannispanagiotopuolos.com website
